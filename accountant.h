@@ -1,14 +1,17 @@
-#include <QString>
 #ifndef ACCOUNTANT_H
 #define ACCOUNTANT_H
 
+#include <QString>
+#include "entity.h"
+#include "user.h"
+#include "account.h"
 
-class Accountant
+class Accountant: protected Entity
 {
-private:
+protected:
     int id;
-    int userId;
-    int accountId;
+    User user;
+    Account account;
     QString name;
 public:
     Accountant();

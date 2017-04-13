@@ -2,11 +2,31 @@ QT += core qml quick sql
 
 CONFIG += c++11
 
-SOURCES += main.cpp \
-    accountant.cpp
+HEADERS += app.h \
+    account.h \
+    currency.h \
+    country.h \
+    entity.h \
+    user.h \
+    expense.h \
+    expense_category.h \
+    accountant.h \
+    exchange_rate.h
 
-RESOURCES += qml.qrc \
-    db.qrc
+SOURCES += main.cpp\
+	app.cpp \
+    account.cpp \
+    currency.cpp \
+    country.cpp \
+    user.cpp \
+    expense.cpp \
+    expense_category.cpp \
+    accountant.cpp \
+    exchange_rate.cpp
+
+
+RESOURCES += qml.qrc\
+	db.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -30,5 +50,3 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-HEADERS += \
-    accountant.h
