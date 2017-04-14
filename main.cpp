@@ -1,22 +1,20 @@
 #include <QGuiApplication>
 #include <QQmlContext>
 #include <QQmlApplicationEngine>
-#include "app.h"
+#include "app_service.h"
 #include "account.h"
 
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QGuiApplication app(argc, argv);
-
-    App ap;
-    ap.init();
-
     QQmlApplicationEngine engine;
+    QQmlContext* ctx = engine.rootContext();
 
-    engine.rootContext()->setContextProperty("hello", 10);
+    AppService appService;
 
-    engine.load(QUrl(QLatin1String("qrc:/main.qml")));
+    ctx->setContextProperty("appService", &appService);
+    engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
     return app.exec();
 }

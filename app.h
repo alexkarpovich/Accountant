@@ -1,17 +1,21 @@
 #ifndef APP_H
 #define APP_H
 
+#include <QObject>
 #include <QString>
 #include <QSqlDatabase>
+#include <QQmlApplicationEngine>
 
-class App
+class App: public QObject
 {
+    Q_OBJECT
+
 protected:
     QSqlDatabase sdb;
     QString dataLocation;
 public:
-    App();
-    void init();
+    explicit App(QObject *parent = 0);
+    void initialize();
     void prepareDirectories();
     bool initDatabase();
 };

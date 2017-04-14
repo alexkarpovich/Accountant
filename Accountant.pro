@@ -2,7 +2,7 @@ QT += core qml quick sql
 
 CONFIG += c++11
 
-HEADERS += app.h \
+HEADERS += \
     account.h \
     currency.h \
     country.h \
@@ -11,10 +11,10 @@ HEADERS += app.h \
     expense.h \
     expense_category.h \
     accountant.h \
-    exchange_rate.h
+    exchange_rate.h \
+    app_service.h
 
 SOURCES += main.cpp\
-	app.cpp \
     account.cpp \
     currency.cpp \
     country.cpp \
@@ -22,11 +22,12 @@ SOURCES += main.cpp\
     expense.cpp \
     expense_category.cpp \
     accountant.cpp \
-    exchange_rate.cpp
+    exchange_rate.cpp \
+    app_service.cpp
 
 
 RESOURCES += qml.qrc\
-	db.qrc
+    db.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =

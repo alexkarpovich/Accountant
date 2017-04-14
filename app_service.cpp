@@ -7,24 +7,20 @@
 #include <QSqlError>
 #include <QDebug>
 #include <QStringList>
-#include <QQmlContext>
-#include <QQmlApplicationEngine>
+#include "app_service.h"
 
-#include "app.h"
-
-App::App(QObject *parent) : QObject(parent)
+AppService::AppService(QObject *parent) :
+    QObject(parent)
 {
-    this->dataLocation = QStandardPaths::standardLocations(QStandardPaths::DataLocation)[0];
-
-    this->prepareDirectories();
-    this->initDatabase();
-    this->initialize();
+    this->prepareFolders();
+    this->initDB();
 }
 
-void App::prepareDirectories() {
+void AppService::prepareFolders() {
     QStringList files;
     files << "db.sqlite";
 
+    this->dataLocation = QStandardPaths::standardLocations(QStandardPaths::DataLocation)[0];
     QDir dataDir(this->dataLocation);
 
     if (!dataDir.exists()) {
@@ -47,18 +43,11 @@ void App::prepareDirectories() {
 
 }
 
-bool App::initDatabase() {
+void AppService::initDB() {
     QSqlDatabase sdb = QSqlDatabase::addDatabase("QSQLITE");
     sdb.setDatabaseName(this->dataLocation + "/db.sqlite");
 
     if (!sdb.open()) {
         qDebug() << sdb.lastError().text();
-        return false;
-    } else {
-        return true;
     }
-}
-
-void App::initialize() {
-
 }
