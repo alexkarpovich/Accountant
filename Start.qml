@@ -42,6 +42,10 @@ Item {
             anchors.topMargin: 20
             anchors.horizontalCenter: parent.horizontalCenter
             text: qsTr("НАЧАТЬ")
+
+            onClicked: {
+                appService.addUser(username.text)
+            }
         }
     }
 }

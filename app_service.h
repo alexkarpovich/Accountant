@@ -16,6 +16,9 @@ protected:
     void initDB();
 public:
     explicit AppService(QObject *parent = 0);
+
+public slots:
+    void addUser(QString username);
 };
 
 #endif // APP_SERVICE_H

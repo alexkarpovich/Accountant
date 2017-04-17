@@ -9,5 +9,5 @@ ApplicationWindow {
     height: 480
     title: qsTr("Accountant")
 
-    Start {}
+    Dashboard {}
 }

@@ -8,6 +8,7 @@
 #include <QDebug>
 #include <QStringList>
 #include "app_service.h"
+#include "user.h"
 
 AppService::AppService(QObject *parent) :
     QObject(parent)
@@ -50,4 +51,13 @@ void AppService::initDB() {
     if (!sdb.open()) {
         qDebug() << sdb.lastError().text();
     }
+}
+
+void AppService::addUser(QString username) {
+    qDebug() << username;
+
+    User * user = new User();
+    user->setUsername(username);
+    user->setActive(true);
+    user->save();
 }
