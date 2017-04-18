@@ -9,5 +9,41 @@ ApplicationWindow {
     height: 480
     title: qsTr("Accountant")
 
-    Dashboard {}
+    property bool isLoggedIn: appService.isLoggedIn()
+
+    Connections {
+            target: appService
+
+            onUserAdded: {
+                isLoggedIn = true
+            }
+        }
+
+    header: ToolBar {
+        visible: isLoggedIn
+        RowLayout {
+            anchors.fill: parent
+            ToolButton {
+                text: qsTr("‹")
+                onClicked: stack.pop()
+            }
+            Label {
+                text: "Title"
+                elide: Label.ElideRight
+                horizontalAlignment: Qt.AlignHCenter
+                verticalAlignment: Qt.AlignVCenter
+                Layout.fillWidth: true
+            }
+            ToolButton {
+                text: qsTr("⋮")
+                onClicked: menu.open()
+            }
+        }
+    }
+
+    Loader {
+        id: stateLoader
+        anchors.fill: parent
+        source: isLoggedIn ? "LoggedIn.qml" : "Start.qml"
+    }
 }

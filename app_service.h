@@ -17,8 +17,12 @@ protected:
 public:
     explicit AppService(QObject *parent = 0);
 
+signals:
+    void userAdded();
+
 public slots:
     void addUser(QString username);
+    bool isLoggedIn();
 };
 
 #endif // APP_SERVICE_H

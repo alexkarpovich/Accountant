@@ -50,7 +50,7 @@ void AppService::initDB() {
 
     if (!sdb.open()) {
         qDebug() << sdb.lastError().text();
-    }
+    }    
 }
 
 void AppService::addUser(QString username) {
@@ -60,4 +60,12 @@ void AppService::addUser(QString username) {
     user->setUsername(username);
     user->setActive(true);
     user->save();
+
+    emit userAdded();
+}
+
+bool AppService::isLoggedIn() {
+    User* activeUser = User::getLoggedIn();
+
+    return activeUser != NULL;
 }

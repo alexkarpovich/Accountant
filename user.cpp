@@ -61,7 +61,7 @@ void User::setActive(bool active) {
 
 void User::save() {
     QString sql;
-    this->createdAt = this->updatedAt = QDateTime();
+    this->createdAt = this->updatedAt = QDateTime::currentDateTime();
 
     if (this->id == 0) {
         sql = "INSERT INTO user (username, email, first_name, last_name, active, created_at, updated_at) "
@@ -113,12 +113,9 @@ User* User::getUserById(int id) {
 }
 
 User* User::getLoggedIn() {
-    QString sql = "SELECT * FROM user WHERE active=1";
-    QSqlQuery query;
+    QSqlQuery query("SELECT * FROM user WHERE active=1");
 
-    if (!query.exec(sql)) {
-        qDebug() << query.lastError();
-    } else if (query.size() > 0){
+    if (query.next()){
         User * activeUser = new User();
         activeUser->setId(query.value(0).toInt());
         activeUser->setUsername(query.value(1).toString());

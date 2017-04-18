@@ -7,7 +7,7 @@
 class User: protected Entity
 {
 protected:
-    int id = NULL;
+    int id = 0;
     QString username = NULL;
     QString email = NULL;
     QString firstName = NULL;
