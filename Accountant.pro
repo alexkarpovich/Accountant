@@ -23,7 +23,8 @@ SOURCES += main.cpp\
     expense_category.cpp \
     accountant.cpp \
     exchange_rate.cpp \
-    app_service.cpp
+    app_service.cpp \
+    entity.cpp
 
 
 RESOURCES += qml.qrc\

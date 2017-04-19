@@ -13,6 +13,7 @@ protected:
     float amount;
 public:
     Account();
+    static Account** getAccountsByUserId(int userId);
 };
 
 #endif // ACCOUNT_H
