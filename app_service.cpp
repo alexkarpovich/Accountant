@@ -56,8 +56,6 @@ void AppService::initDB() {
 }
 
 void AppService::addUser(QString username) {
-    qDebug() << username;
-
     User * user = new User();
     user->setUsername(username);
     user->setActive(true);
@@ -76,4 +74,17 @@ bool AppService::isLoggedIn() {
     User* activeUser = User::getLoggedIn();
 
     return activeUser != NULL;
+}
+
+QList<QObject*> AppService::getAccountList() {
+    QList<QObject*> accountList;
+
+    User * activeUser = User::getLoggedIn();
+    QVector<Account*> accounts = Account::getByUserId(activeUser->getId());
+
+    for (int i = 0; i < accounts.size(); i++) {
+        accountList.append(accounts.at(i)->toModel());
+    }
+
+    return accountList;
 }

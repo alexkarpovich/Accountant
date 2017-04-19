@@ -10,7 +10,7 @@
 class Accountant: protected Entity
 {
 protected:
-    int id;
+    int id = 0;
     QString name;
     bool active;
 public:
@@ -23,10 +23,12 @@ public:
     void setName(QString name);
     void setActive(bool isActive);
     void linkUser(User * user);
+    void linkAccount(Account * accounts);
     void save();
 
     static Accountant * getById(int id);
     static QVector<Accountant*> getByUserId(int userId);
+    static QVector<Accountant*> getByAccountId(int accountId);
 };
 
 #endif // ACCOUNTANT_H

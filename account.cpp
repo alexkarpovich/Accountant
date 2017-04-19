@@ -17,6 +17,38 @@ Account::Account(int id, int currencyId, QString name, float amount, QDateTime c
     this->currency = currency;
 }
 
+int Account::getId() {
+    return this->id;
+}
+
+Currency* Account::getCurrency() {
+    return this->currency;
+}
+
+QString Account::getName() {
+    return this->name;
+}
+
+float Account::getAmount() {
+    return this->amount;
+}
+
+void Account::setId(int id) {
+    this->id = id;
+}
+
+void Account::setCurrency(int currencyId) {
+    this->currency = Currency::getById(currencyId);
+}
+
+void Account::setName(QString name) {
+    this->name = name;
+}
+
+void Account::setAmount(float amount) {
+    this->amount = amount;
+}
+
 QVector<Account*> Account::getByUserId(int userId) {
     QSqlQuery query;
     QVector<Account*> accounts;
@@ -29,7 +61,8 @@ QVector<Account*> Account::getByUserId(int userId) {
     query.bindValue(":user_id", userId);
 
     if (!query.exec()) {
-        qDebug() << query.lastError();
+        qDebug() << QFileInfo(QCoreApplication::applicationFilePath()).fileName() + query.lastError().text();
+        qDebug() << query.lastQuery();
 
         return accounts;
     }
@@ -54,4 +87,13 @@ QVector<Account*> Account::getByUserId(int userId) {
     }
 
     return accounts;
+}
+
+AccountModel* Account::toModel() {
+    AccountModel * accountModel = new AccountModel();
+    accountModel->setId(this->id);
+    accountModel->setName(this->name);
+    accountModel->setAmount(this->amount);
+
+    return accountModel;
 }

@@ -8,7 +8,7 @@
 class Expense: protected Entity
 {
 protected:
-    int id;
+    int id = 0;
     ExpenseCategory category;
     float value;
 public:

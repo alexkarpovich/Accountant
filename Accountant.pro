@@ -12,7 +12,8 @@ HEADERS += \
     expense_category.h \
     accountant.h \
     exchange_rate.h \
-    app_service.h
+    app_service.h \
+    models/account_model.h
 
 SOURCES += main.cpp\
     account.cpp \
@@ -24,8 +25,8 @@ SOURCES += main.cpp\
     accountant.cpp \
     exchange_rate.cpp \
     app_service.cpp \
-    entity.cpp
-
+    entity.cpp \
+    models/account_model.cpp
 
 RESOURCES += qml.qrc\
     db.qrc

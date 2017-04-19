@@ -4,12 +4,15 @@ import QtQml.Models 2.1
 
 Item {
     id: accountList
+    height: 80
     anchors.left: parent.left
     anchors.right: parent.right
 
+    property var accountModel: appService.getAccountList()
+
     GridView {
       id: root
-      height: 80
+      height: parent.height
       anchors.left: parent.left
       anchors.right: parent.right
       cellWidth: 80; cellHeight: 80
@@ -20,22 +23,7 @@ Item {
 
       model: DelegateModel {
           id: visualModel
-          model: ListModel {
-              id: colorModel
-              ListElement { color: "blue" }
-              ListElement { color: "green" }
-              ListElement { color: "red" }
-              ListElement { color: "yellow" }
-              ListElement { color: "yellow" }
-              ListElement { color: "yellow" }
-              ListElement { color: "yellow" }
-              ListElement { color: "yellow" }
-              ListElement { color: "yellow" }
-              ListElement { color: "yellow" }
-              ListElement { color: "yellow" }
-              ListElement { color: "yellow" }
-
-          }
+          model: accountModel
           delegate: MouseArea {
               id: delegateRoot
 

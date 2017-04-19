@@ -126,6 +126,45 @@ QVector<Accountant*> Accountant::getByUserId(int userId) {
     return accountants;
 }
 
+QVector<Accountant*> Accountant::getByAccountId(int accountId) {
+    QSqlQuery query;
+    QVector<Accountant*> accountants;
+
+    QString sql = "SELECT accountant_id, acc.name, acc.created_at, acc.updated_at FROM accountant_account aa "
+                  "LEFT JOIN accountant acc ON acc.id = aa.accountant_id "
+                  "WHERE account_id=:account_id";
+
+    query.prepare(sql);
+    query.bindValue(":account_id", accountId);
+
+    if (!query.exec()) {
+        qDebug() << query.lastError();
+        qDebug() << query.lastQuery();
+
+        return accountants;
+    }
+
+    int count = query.size();
+
+    if (!count) {
+        return accountants;
+    }
+
+    while(query.next()) {
+        Accountant * accountant = new Accountant(
+            query.value(0).toInt(),
+            query.value(1).toString(),
+            false,
+            query.value(3).toDateTime(),
+            query.value(4).toDateTime()
+        );
+
+        accountants.append(accountant);
+    }
+
+    return accountants;
+}
+
 void Accountant::linkUser(User *user) {
     QVector<Accountant*> accountants = Accountant::getByUserId(user->getId());
 
@@ -139,8 +178,39 @@ void Accountant::linkUser(User *user) {
 
         if (!query.exec()) {
             qDebug() << query.lastError();
+            qDebug() << query.lastQuery();
 
             return;
         }
     }
+}
+
+void Accountant::linkAccount(Account * account) {
+    QVector<Accountant*> accountants = Accountant::getByAccountId(account->getId());
+    bool isAlreadyAdded = false;
+
+    for(int i = 0; i < accountants.size(); i++) {
+        if (accountants.at(i)->getId() == this->getId()) {
+            isAlreadyAdded = true;
+            break;
+        }
+    }
+
+    if (isAlreadyAdded) {
+        return;
+    }
+
+    QSqlQuery query;
+    QString sql = "INSERT INTO accountant_account (accountant_id, account_id) VALUES(:accountant_id, :account_id)";
+    query.prepare(sql);
+    query.bindValue(":accountant_id", QVariant(this->getId()));
+    query.bindValue(":account_id", QVariant(account->getId()));
+
+    if (!query.exec()) {
+        qDebug() << query.lastError();
+        qDebug() << query.lastQuery();
+
+        return;
+    }
+
 }

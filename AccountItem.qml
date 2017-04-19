@@ -34,7 +34,7 @@ Item {
         width: 54
         height: 54
         anchors.horizontalCenter: parent.horizontalCenter
-        color: model.color
+        color: '#ffff00'
         radius: 27
     }
 
@@ -45,7 +45,7 @@ Item {
             leftMargin: 5
             rightMargin: 5
         }
-        text: model.color
+        text: model.modelData.name
         font.pointSize: 9
     }
 }

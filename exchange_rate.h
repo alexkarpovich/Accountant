@@ -9,7 +9,7 @@
 class ExchangeRate: protected Entity
 {
 protected:
-    int id;
+    int id = 0;
     Currency * base;
     Currency * compare;
     float rate;

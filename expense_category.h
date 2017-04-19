@@ -7,10 +7,15 @@
 class ExpenseCategory: protected Entity
 {
 protected:
-    int id;
+    int id = 0;
     QString name;
 public:
     ExpenseCategory();
+    ExpenseCategory(int id, QString name, QDateTime createdAt, QDateTime updatedAt);
+    int getId();
+    QString getName();
+    void setId(int id);
+    void setName(QString name);
 };
 
 #endif // EXPENSE_CATEGORY_H

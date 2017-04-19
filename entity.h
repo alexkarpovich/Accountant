@@ -6,6 +6,8 @@
 #include <QSqlError>
 #include <QDebug>
 #include <QVariant>
+#include <QFileInfo>
+#include <QCoreApplication>
 
 class Entity
 {

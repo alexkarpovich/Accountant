@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QString>
 #include <QSqlDatabase>
+#include <QList>
+#include "models/account_model.h"
 
 class AppService : public QObject
 {
@@ -23,6 +25,7 @@ signals:
 public slots:
 
     void addUser(QString username);
+    QList<QObject*> getAccountList();
     bool isLoggedIn();
 };
 
