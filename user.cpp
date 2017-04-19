@@ -1,9 +1,3 @@
-#include <QDateTime>
-#include <QSqlDatabase>
-#include <QSqlQuery>
-#include <QSqlError>
-#include <QVariant>
-#include <QDebug>
 #include "user.h"
 
 User::User()
@@ -84,10 +78,14 @@ void User::save() {
     if (!query.exec()) {
         qDebug() << query.lastError();
         qDebug() << query.executedQuery();
+
+        return;
     }
+
+    this->id = query.lastInsertId().toInt();
 }
 
-User* User::getUserById(int id) {
+User* User::getById(int id) {
     QString sql = "SELECT * FROM user WHERE id=:id";
     QSqlQuery query;
     query.prepare(sql);

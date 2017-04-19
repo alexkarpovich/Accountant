@@ -21,6 +21,7 @@ signals:
     void userAdded();
 
 public slots:
+
     void addUser(QString username);
     bool isLoggedIn();
 };

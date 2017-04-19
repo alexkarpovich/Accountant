@@ -29,7 +29,7 @@ public:
     void setLastName(QString);
     void setActive(bool);
     void save();
-    static User* getUserById(int);
+    static User* getById(int);
     static User* getLoggedIn();
 };
 

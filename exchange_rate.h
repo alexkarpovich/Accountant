@@ -10,8 +10,8 @@ class ExchangeRate: protected Entity
 {
 protected:
     int id;
-    Currency base;
-    Currency compare;
+    Currency * base;
+    Currency * compare;
     float rate;
     QDateTime date;
 public:

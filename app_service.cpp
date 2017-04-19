@@ -7,8 +7,10 @@
 #include <QSqlError>
 #include <QDebug>
 #include <QStringList>
+#include <QUuid>
 #include "app_service.h"
 #include "user.h"
+#include "accountant.h"
 
 AppService::AppService(QObject *parent) :
     QObject(parent)
@@ -60,6 +62,12 @@ void AppService::addUser(QString username) {
     user->setUsername(username);
     user->setActive(true);
     user->save();
+
+    Accountant * accountant = new Accountant();
+    accountant->setName(QUuid::createUuid().toString());
+    accountant->save();
+
+    accountant->linkUser(user);
 
     emit userAdded();
 }

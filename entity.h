@@ -2,6 +2,10 @@
 #define ENTITY_H
 
 #include <QDateTime>
+#include <QSqlQuery>
+#include <QSqlError>
+#include <QDebug>
+#include <QVariant>
 
 class Entity
 {

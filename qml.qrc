@@ -5,5 +5,7 @@
         <file>Start.qml</file>
         <file>Dashboard.qml</file>
         <file>LoggedIn.qml</file>
+        <file>AccountItem.qml</file>
+        <file>AccountList.qml</file>
     </qresource>
 </RCC>
